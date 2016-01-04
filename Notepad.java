@@ -28,33 +28,31 @@ import javax.swing.undo.UndoManager;
 public class Notepad extends JFrame implements ActionListener {
 
 	
-	//çª—ä½“å’Œè¾“å…¥åŒºåŸŸ
+	//´°ÌåºÍÊäÈëÇøÓò
 	JPanel pl = new JPanel();
 	JTextArea myarea = new JTextArea();
 
-	// ç›¸å…³å˜é‡
-	int start = 0;// æŸ¥æ‰¾å¼€å§‹ä½ç½®
-	int end = 0;// æŸ¥æ‰¾ç»“æŸä½ç½®
-	private String filename; // æ‰“å¼€çš„æ–‡ä»¶å
-	String textContent = "";// ç¼–è¾‘æ¡†ä¸­çš„å†…å®¹
 	
-	UndoManager undoManager = new UndoManager();// æ’¤é”€ç®¡ç†å™¨
+	private String filename; // ´ò¿ªµÄÎÄ¼şÃû
+	String textContent = "";// ±à¼­¿òÖĞµÄÄÚÈİ
+	
+	UndoManager undoManager = new UndoManager();// ³·Ïú¹ÜÀíÆ÷
 
 	public Notepad() {
-		initComponment();// é¢æ¿åˆå§‹åŒ–
+		initComponment();// Ãæ°å³õÊ¼»¯
 	}
 
 	private void initComponment() {
-		// èœå•æ 
+		// ²Ëµ¥À¸
 		JMenuBar mb = new JMenuBar();
 
-		// å¼¹å‡ºèœå•
+		// µ¯³ö²Ëµ¥
 		final JPopupMenu myPopMenu = new JPopupMenu();
-		JMenuItem copy_pop = new JMenuItem("å¤åˆ¶");
-		JMenuItem cut_pop = new JMenuItem("å‰ªåˆ‡");
-		JMenuItem paste_pop = new JMenuItem("ç²˜è´´");
-		JMenuItem delete_pop = new JMenuItem("åˆ é™¤");
-		JMenuItem exit_pop = new JMenuItem("æ¸…ç©º");
+		JMenuItem copy_pop = new JMenuItem("¸´ÖÆ");
+		JMenuItem cut_pop = new JMenuItem("¼ôÇĞ");
+		JMenuItem paste_pop = new JMenuItem("Õ³Ìù");
+		JMenuItem delete_pop = new JMenuItem("É¾³ı");
+		JMenuItem exit_pop = new JMenuItem("Çå¿Õ");
 
 		myPopMenu.add(cut_pop);
 		myPopMenu.add(copy_pop);
@@ -62,34 +60,34 @@ public class Notepad extends JFrame implements ActionListener {
 		myPopMenu.add(paste_pop);
 		myPopMenu.add(exit_pop);
 
-		// ç»‘å®šç›‘å¬å™¨
+		// °ó¶¨¼àÌıÆ÷
 		cut_pop.addActionListener(this);
 		copy_pop.addActionListener(this);
 		delete_pop.addActionListener(this);
 		paste_pop.addActionListener(this);
 		exit_pop.addActionListener(this);
 
-		// èœå•
-		JMenu file = new JMenu("æ–‡ä»¶");
-		JMenu edit = new JMenu("ç¼–è¾‘");
-		JMenu about = new JMenu("å…³äº");
+		// ²Ëµ¥
+		JMenu file = new JMenu("ÎÄ¼ş");
+		JMenu edit = new JMenu("±à¼­");
+		JMenu about = new JMenu("¹ØÓÚ");
 
-		// å­èœå•
-		JMenuItem new_file = new JMenuItem("æ–°å»º");
-		JMenuItem open = new JMenuItem("æ‰“å¼€");
-		JMenuItem save = new JMenuItem("ä¿å­˜");
-		JMenuItem save_as = new JMenuItem("å¦å­˜ä¸º");
-		JMenuItem exit = new JMenuItem("é€€å‡º");
+		// ×Ó²Ëµ¥
+		JMenuItem new_file = new JMenuItem("ĞÂ½¨");
+		JMenuItem open = new JMenuItem("´ò¿ª");
+		JMenuItem save = new JMenuItem("±£´æ");
+		JMenuItem save_as = new JMenuItem("Áí´æÎª");
+		JMenuItem exit = new JMenuItem("ÍË³ö");
 
-		JMenuItem copy = new JMenuItem("å¤åˆ¶");
-		JMenuItem cut = new JMenuItem("å‰ªåˆ‡");
-		JMenuItem paste = new JMenuItem("ç²˜è´´");
-		JMenuItem delete = new JMenuItem("åˆ é™¤");
-		JMenuItem search = new JMenuItem("æŸ¥æ‰¾å’Œæ›¿æ¢");
+		JMenuItem copy = new JMenuItem("¸´ÖÆ");
+		JMenuItem cut = new JMenuItem("¼ôÇĞ");
+		JMenuItem paste = new JMenuItem("Õ³Ìù");
+		JMenuItem delete = new JMenuItem("É¾³ı");
+		JMenuItem search = new JMenuItem("²éÕÒºÍÌæ»»");
 		
-		JMenuItem aboutsoft = new JMenuItem("å…³äºè½¯ä»¶");
+		JMenuItem aboutsoft = new JMenuItem("¹ØÓÚÈí¼ş");
 
-		// ç»‘å®šç›‘å¬äº‹ä»¶
+		// °ó¶¨¼àÌıÊÂ¼ş
 		aboutsoft.addActionListener(this);
 		
 		new_file.addActionListener(this);
@@ -107,7 +105,7 @@ public class Notepad extends JFrame implements ActionListener {
 		
 		
 
-		// å°†èœå•å’Œç›¸åº”çš„å­èœå•æ·»åŠ åˆ°èœå•æ 
+		// ½«²Ëµ¥ºÍÏàÓ¦µÄ×Ó²Ëµ¥Ìí¼Óµ½²Ëµ¥À¸
 		mb.add(file);
 		mb.add(edit);
 		mb.add(about);
@@ -126,26 +124,26 @@ public class Notepad extends JFrame implements ActionListener {
 		
 		about.add(aboutsoft);
 
-		// ç»™æ–‡æœ¬åŒºåŸŸæ·»åŠ æ»šåŠ¨æ¡
+		// ¸øÎÄ±¾ÇøÓòÌí¼Ó¹ö¶¯Ìõ
 		myarea.add(myPopMenu);
 		JScrollPane scrollpane = new JScrollPane(myarea);
 		add(scrollpane);
-		// ä¸»çª—å£
-		setTitle("è®°äº‹æœ¬");
+		// Ö÷´°¿Ú
+		setTitle("¼ÇÊÂ±¾");
 		setSize(600, 400);
 		setLocation(400, 300);
-		// æ·»åŠ èœå•æ 
+		// Ìí¼Ó²Ëµ¥À¸
 		setJMenuBar(mb);
 		
 		
 	
 
-		// çª—å£ç›‘å¬
+		// ´°¿Ú¼àÌı
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent evt) {
 				if(!myarea.getText().equals(textContent)) 
 				{
-					int result = JOptionPane.showConfirmDialog(null, "æ–‡ä»¶å†…å®¹å·²æ”¹å˜ï¼Œç¡®è®¤ä¿å­˜é€€å‡ºå—ï¼Ÿ", "è­¦å‘Š", JOptionPane.YES_NO_OPTION);
+					int result = JOptionPane.showConfirmDialog(null, "ÎÄ¼şÄÚÈİÒÑ¸Ä±ä£¬È·ÈÏ±£´æÍË³öÂğ£¿", "¾¯¸æ", JOptionPane.YES_NO_OPTION);
 					switch (result) {
 					case JOptionPane.NO_OPTION:
 						System.exit(0);
@@ -164,26 +162,26 @@ public class Notepad extends JFrame implements ActionListener {
 			}
 		});
 		
-		//é”®ç›˜ç›‘å¬
+		//¼üÅÌ¼àÌı
 		myarea.addKeyListener(new KeyAdapter() 
 		{
 			public void keyPressed(KeyEvent ke) 
 			{
 				
-				//ctrl+få®ç°æŸ¥æ‰¾åŠŸèƒ½
+				//ctrl+fÊµÏÖ²éÕÒ¹¦ÄÜ
 				 if ((ke.getKeyCode() == KeyEvent.VK_F)   
                          && (ke.isControlDown())) 
 				 { 
-					 	 // æŸ¥æ‰¾å¯¹è¯æ¡†
-						JDialog search = new JDialog(Notepad.this, "æŸ¥æ‰¾å’Œæ›¿æ¢");
+					 	 // ²éÕÒ¶Ô»°¿ò
+						JDialog search = new JDialog(Notepad.this, "²éÕÒºÍÌæ»»");
 						search.setSize(200, 100);
 						search.setLocation(450, 350);
-						JLabel label_1 = new JLabel("æŸ¥æ‰¾çš„å†…å®¹");
-						JLabel label_2 = new JLabel("æ›¿æ¢çš„å†…å®¹");
+						JLabel label_1 = new JLabel("²éÕÒµÄÄÚÈİ");
+						JLabel label_2 = new JLabel("Ìæ»»µÄÄÚÈİ");
 						final JTextField textField_1 = new JTextField(5);
 						final JTextField textField_2 = new JTextField(5);
-						JButton buttonFind = new JButton("æŸ¥æ‰¾");
-						JButton buttonChange = new JButton("æ›¿æ¢");
+						JButton buttonFind = new JButton("²éÕÒ");
+						JButton buttonChange = new JButton("Ìæ»»");
 						JPanel panel = new JPanel(new GridLayout(2, 3));
 						panel.add(label_1);
 						panel.add(textField_1);
@@ -194,20 +192,20 @@ public class Notepad extends JFrame implements ActionListener {
 						search.add(panel);
 						search.setVisible(true);
 						
-						// ä¸ºæŸ¥æ‰¾ä¸‹ä¸€ä¸ª æŒ‰é’®ç»‘å®šç›‘å¬äº‹ä»¶
+						// Îª²éÕÒÏÂÒ»¸ö °´Å¥°ó¶¨¼àÌıÊÂ¼ş
 						buttonFind.addActionListener(new ActionListener() {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								// TODO Auto-generated method stub
-								String findText = textField_1.getText();// æŸ¥æ‰¾çš„å­—ç¬¦ä¸²
+								String findText = textField_1.getText();// ²éÕÒµÄ×Ö·û´®
 
-								String textArea = myarea.getText();// å½“å‰æ–‡æœ¬æ¡†çš„å†…å®¹
+								String textArea = myarea.getText();// µ±Ç°ÎÄ±¾¿òµÄÄÚÈİ
 								start = textArea.indexOf(findText, end);
 								end = start + findText.length();
-								if (start == -1)// æ²¡æœ‰æ‰¾åˆ°
+								if (start == -1)// Ã»ÓĞÕÒµ½
 								{
-									JOptionPane.showMessageDialog(null, "â€œ"+findText+"â€"+"å·²ç»æŸ¥æ‰¾å®Œæ¯•", "è®°äº‹æœ¬", JOptionPane.WARNING_MESSAGE);
+									JOptionPane.showMessageDialog(null, "¡°"+findText+"¡±"+"ÒÑ¾­²éÕÒÍê±Ï", "¼ÇÊÂ±¾", JOptionPane.WARNING_MESSAGE);
 									myarea.select(start, end);
 								} else {
 									myarea.select(start, end);
@@ -215,13 +213,13 @@ public class Notepad extends JFrame implements ActionListener {
 
 							}
 						});
-						// ä¸ºæ›¿æ¢æŒ‰é’®ç»‘å®šç›‘å¬æ—¶é—´
+						// ÎªÌæ»»°´Å¥°ó¶¨¼àÌıÊ±¼ä
 						buttonChange.addActionListener(new ActionListener() {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								// TODO Auto-generated method stub
-								String changeText = textField_2.getText();// æ›¿æ¢çš„å­—ç¬¦ä¸²
+								String changeText = textField_2.getText();// Ìæ»»µÄ×Ö·û´®
 								myarea.select(start, end);
 								myarea.replaceSelection(changeText);
 								myarea.select(start, end);
@@ -229,12 +227,12 @@ public class Notepad extends JFrame implements ActionListener {
 						});
 					 
 				 }
-				 //escé€€å‡º
+				 //escÍË³ö
 				if (ke.getKeyCode()==KeyEvent.VK_ESCAPE) 
 				{
 					if(!myarea.getText().equals(textContent)) 
 					{
-						int result = JOptionPane.showConfirmDialog(null, "æ–‡ä»¶å†…å®¹å·²æ”¹å˜ï¼Œç¡®è®¤ä¿å­˜é€€å‡ºå—ï¼Ÿ", "è­¦å‘Š", 1);
+						int result = JOptionPane.showConfirmDialog(null, "ÎÄ¼şÄÚÈİÒÑ¸Ä±ä£¬È·ÈÏ±£´æÍË³öÂğ£¿", "¾¯¸æ", 1);
 						switch (result) {
 						case JOptionPane.NO_OPTION:
 							System.exit(0);
@@ -256,13 +254,13 @@ public class Notepad extends JFrame implements ActionListener {
 			}
 		});
 
-		// é¼ æ ‡ç›‘å¬
+		// Êó±ê¼àÌı
 		myarea.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				int mods = e.getModifiers();
-				// é¼ æ ‡å³é”®
+				// Êó±êÓÒ¼ü
 				if ((mods & InputEvent.BUTTON3_MASK) != 0) {
-					// å¼¹å‡ºèœå•
+					// µ¯³ö²Ëµ¥
 					myPopMenu.show(e.getComponent(), e.getX(), e.getY());
 				}
 			}
@@ -271,26 +269,31 @@ public class Notepad extends JFrame implements ActionListener {
 
 	}
 
+	
+	// Ïà¹Ø±äÁ¿
+		int start = 0;// ²éÕÒ¿ªÊ¼Î»ÖÃ
+		int end = 0;// ²éÕÒ½áÊøÎ»ÖÃ
+		
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		try {
 			
-			 if (e.getActionCommand() == "æ–°å»º") {
+			 if (e.getActionCommand() == "ĞÂ½¨") {
 				myarea.setText("");
-			} else if (e.getActionCommand() == "æ‰“å¼€") {
-				FileDialog fileDialog = new FileDialog(this, "æ‰“å¼€æ–‡ä»¶", FileDialog.LOAD);
+			} else if (e.getActionCommand() == "´ò¿ª") {
+				FileDialog fileDialog = new FileDialog(this, "´ò¿ªÎÄ¼ş", FileDialog.LOAD);
 				fileDialog.setFile("*.txt");
 				fileDialog.setVisible(true);
 				if (fileDialog.getFile() != null) {
-					filename = fileDialog.getDirectory() + fileDialog.getFile();// è·å¾—æ–‡ä»¶å
+					filename = fileDialog.getDirectory() + fileDialog.getFile();// »ñµÃÎÄ¼şÃû
 
-					// è¯»å–æ–‡ä»¶
+					// ¶ÁÈ¡ÎÄ¼ş
 
-					FileReader file_reader = new FileReader(filename);// æ­¤å¤„å¿…é¡»è¦æ•è·å¼‚å¸¸
+					FileReader file_reader = new FileReader(filename);// ´Ë´¦±ØĞëÒª²¶»ñÒì³£
 					BufferedReader br = new BufferedReader(file_reader);
 					String temp = "";
-					while (br.ready())// åˆ¤æ–­ç¼“å†²åŒºæ˜¯å¦ä¸ºç©ºï¼Œéç©ºæ—¶è¿”å›true
+					while (br.ready())// ÅĞ¶Ï»º³åÇøÊÇ·ñÎª¿Õ£¬·Ç¿ÕÊ±·µ»Øtrue
 					{
 						int c = br.read();
 						temp = temp+ (char)c;
@@ -299,17 +302,17 @@ public class Notepad extends JFrame implements ActionListener {
 					br.close();
 					file_reader.close();
 					textContent = myarea.getText();
-					setTitle("è®°äº‹æœ¬-" + filename);
+					setTitle("¼ÇÊÂ±¾-" + filename);
 
 				}
-			} else if (e.getActionCommand() == "ä¿å­˜") {
+			} else if (e.getActionCommand() == "±£´æ") {
 				save();
-			} else if (e.getActionCommand() == "å¦å­˜ä¸º") {
+			} else if (e.getActionCommand() == "Áí´æÎª") {
 				otherSave();
-			} else if (e.getActionCommand() == "é€€å‡º") {
+			} else if (e.getActionCommand() == "ÍË³ö") {
 				if(!myarea.getText().equals(textContent)) 
 				{
-					int result = JOptionPane.showConfirmDialog(null, "æ–‡ä»¶å†…å®¹å·²æ”¹å˜ï¼Œç¡®è®¤ä¿å­˜é€€å‡ºå—ï¼Ÿ", "è­¦å‘Š", 1);
+					int result = JOptionPane.showConfirmDialog(null, "ÎÄ¼şÄÚÈİÒÑ¸Ä±ä£¬È·ÈÏ±£´æÍË³öÂğ£¿", "¾¯¸æ", 1);
 					switch (result) {
 					case JOptionPane.NO_OPTION:
 						System.exit(0);
@@ -328,17 +331,17 @@ public class Notepad extends JFrame implements ActionListener {
 						System.exit(0);
 					
 				}
-			} else if (e.getActionCommand() == "æŸ¥æ‰¾å’Œæ›¿æ¢") {
-				// æŸ¥æ‰¾å¯¹è¯æ¡†
-				JDialog search = new JDialog(this, "æŸ¥æ‰¾å’Œæ›¿æ¢");
+			} else if (e.getActionCommand() == "²éÕÒºÍÌæ»»") {
+				// ²éÕÒ¶Ô»°¿ò
+				JDialog search = new JDialog(this, "²éÕÒºÍÌæ»»");
 				search.setSize(200, 100);
 				search.setLocation(450, 350);
-				JLabel label_1 = new JLabel("æŸ¥æ‰¾çš„å†…å®¹");
-				JLabel label_2 = new JLabel("æ›¿æ¢çš„å†…å®¹");
+				JLabel label_1 = new JLabel("²éÕÒµÄÄÚÈİ");
+				JLabel label_2 = new JLabel("Ìæ»»µÄÄÚÈİ");
 				final JTextField textField_1 = new JTextField(5);
 				final JTextField textField_2 = new JTextField(5);
-				JButton buttonFind = new JButton("æŸ¥æ‰¾");
-				JButton buttonChange = new JButton("æ›¿æ¢");
+				JButton buttonFind = new JButton("²éÕÒ");
+				JButton buttonChange = new JButton("Ìæ»»");
 				JPanel panel = new JPanel(new GridLayout(2, 3));
 				panel.add(label_1);
 				panel.add(textField_1);
@@ -349,20 +352,23 @@ public class Notepad extends JFrame implements ActionListener {
 				search.add(panel);
 				search.setVisible(true);
 
-				// ä¸ºæŸ¥æ‰¾ä¸‹ä¸€ä¸ª æŒ‰é’®ç»‘å®šç›‘å¬äº‹ä»¶
+				
+				
+				// Îª²éÕÒÏÂÒ»¸ö °´Å¥°ó¶¨¼àÌıÊÂ¼ş
 				buttonFind.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						String findText = textField_1.getText();// æŸ¥æ‰¾çš„å­—ç¬¦ä¸²
+						String findText = textField_1.getText();// ²éÕÒµÄ×Ö·û´®
 
-						String textArea = myarea.getText();// å½“å‰æ–‡æœ¬æ¡†çš„å†…å®¹
+						String textArea = myarea.getText();// µ±Ç°ÎÄ±¾¿òµÄÄÚÈİ
 						start = textArea.indexOf(findText, end);
 						end = start + findText.length();
-						if (start == -1)// æ²¡æœ‰æ‰¾åˆ°
+						// Ã»ÓĞÕÒµ½
+						if (start == -1)
 						{
-							JOptionPane.showMessageDialog(null, "â€œ"+findText+"â€"+"å·²ç»æŸ¥æ‰¾å®Œæ¯•", "è®°äº‹æœ¬", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null, "¡°"+findText+"¡±"+"ÒÑ¾­²éÕÒÍê±Ï", "¼ÇÊÂ±¾", JOptionPane.WARNING_MESSAGE);
 							myarea.select(start, end);
 						} else {
 							myarea.select(start, end);
@@ -370,33 +376,33 @@ public class Notepad extends JFrame implements ActionListener {
 
 					}
 				});
-				// ä¸ºæ›¿æ¢æŒ‰é’®ç»‘å®šç›‘å¬æ—¶é—´
+				// ÎªÌæ»»°´Å¥°ó¶¨¼àÌıÊÂ¼ş
 				buttonChange.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						String changeText = textField_2.getText();// æ›¿æ¢çš„å­—ç¬¦ä¸²
+						String changeText = textField_2.getText();// Ìæ»»µÄ×Ö·û´®
 						myarea.select(start, end);
 						myarea.replaceSelection(changeText);
 						myarea.select(start, end);
 					}
 				});
 
-			} else if (e.getActionCommand() == "å¤åˆ¶") {
+			} else if (e.getActionCommand() == "¸´ÖÆ") {
 				copy();
-			} else if (e.getActionCommand() == "ç²˜è´´") {
+			} else if (e.getActionCommand() == "Õ³Ìù") {
 				paste();
-			} else if (e.getActionCommand() == "å‰ªåˆ‡") {
+			} else if (e.getActionCommand() == "¼ôÇĞ") {
 				cut();
-			} else if (e.getActionCommand() == "åˆ é™¤") {
+			} else if (e.getActionCommand() == "É¾³ı") {
 				delete();
-			} else if (e.getActionCommand() == "å…³äºè½¯ä»¶") {
-					JOptionPane.showMessageDialog(null,"å•é‡‘ä¼Ÿè®¾è®¡ç¼–å†™","è½¯ä»¶ä¿¡æ¯",JOptionPane. INFORMATION_MESSAGE);
-			}else if (e.getActionCommand() == "æ¸…ç©º") 
+			} else if (e.getActionCommand() == "¹ØÓÚÈí¼ş") {
+					JOptionPane.showMessageDialog(null,"µ¥½ğÎ°Éè¼Æ±àĞ´","Èí¼şĞÅÏ¢",JOptionPane. INFORMATION_MESSAGE);
+			}else if (e.getActionCommand() == "Çå¿Õ") 
 			{
 
-					int result = JOptionPane.showConfirmDialog(null, "ç¡®è®¤æ¸…ç©ºæ‰€æœ‰æ–‡å­—å—ï¼Ÿ", "è­¦å‘Š", 1);
+					int result = JOptionPane.showConfirmDialog(null, "È·ÈÏÇå¿ÕËùÓĞÎÄ×ÖÂğ£¿", "¾¯¸æ", 1);
 					if (result == JOptionPane.OK_OPTION) {
 //						myarea.replaceRange(null,0,textContent.length());
 						myarea.setText(null);
@@ -417,7 +423,7 @@ public class Notepad extends JFrame implements ActionListener {
 	
 	
 	
-	//ä¿å­˜
+	//±£´æ
 	private void save() {
 		
 		
@@ -426,7 +432,7 @@ public class Notepad extends JFrame implements ActionListener {
 			try {
 				File file = new File(filename);
 				FileWriter file_writer = new FileWriter(file);
-				//å°†æ–‡ä»¶è¾“å‡ºæµåŒ…è£…è¿›ç¼“å†²åŒº
+				//½«ÎÄ¼şÊä³öÁ÷°ü×°½ø»º³åÇø
 				BufferedWriter bw = new BufferedWriter(file_writer);
 				PrintWriter pw = new PrintWriter(bw);
 
@@ -445,14 +451,14 @@ public class Notepad extends JFrame implements ActionListener {
 	}
 	
 	
-	//å¦å­˜ä¸º
+	//Áí´æÎª
 	private void otherSave() 
 	{
-		FileDialog fileDialog = new FileDialog(this, "å¦å­˜ä¸º", FileDialog.SAVE);
+		FileDialog fileDialog = new FileDialog(this, "Áí´æÎª", FileDialog.SAVE);
 		fileDialog.setFile("*.txt");
 		fileDialog.setVisible(true);
 		if (fileDialog.getFile() != null) {
-			// å†™å…¥æ–‡ä»¶
+			// Ğ´ÈëÎÄ¼ş
 			FileWriter fw;
 			try {
 			fw = new FileWriter(fileDialog.getDirectory() + fileDialog.getFile());
@@ -473,15 +479,15 @@ public class Notepad extends JFrame implements ActionListener {
 	
 	
 	
-	//å‰ªåˆ‡
+	//¼ôÇĞ
 	private void cut() {
 		copy();
 		delete();
 	}
-    //å¤åˆ¶
+    //¸´ÖÆ
 	private void copy() {
 		if (myarea.getSelectedText() == null) {
-			JOptionPane.showMessageDialog(null, "ä½ æ²¡æœ‰é€‰ä¸­ä»»ä½•æ–‡å­—ï¼", "è®°äº‹æœ¬", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "ÄãÃ»ÓĞÑ¡ÖĞÈÎºÎÎÄ×Ö£¡", "¼ÇÊÂ±¾", JOptionPane.WARNING_MESSAGE);
 		}
 		Clipboard clipBoard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		StringSelection stringSelection = new StringSelection(myarea.getSelectedText());
@@ -489,21 +495,21 @@ public class Notepad extends JFrame implements ActionListener {
 	}
 	
 	
-	//ç²˜è´´
+	//Õ³Ìù
 	private void paste() throws UnsupportedFlavorException, IOException {
 		String content_copy = "";
-		// æ„é€ ç³»ç»Ÿå‰ªåˆ‡æ¿
+		// ¹¹ÔìÏµÍ³¼ôÇĞ°å
 		Clipboard clipBoard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
-		// è·å–å‰ªåˆ‡æ¿å†…å®¹
+		// »ñÈ¡¼ôÇĞ°åÄÚÈİ
 		Transferable content = clipBoard.getContents(null);
 
 		if (content != null) {
-			// æ£€æŸ¥æ˜¯å¦æ˜¯æ–‡æœ¬ç±»å‹
+			// ¼ì²éÊÇ·ñÊÇÎÄ±¾ÀàĞÍ
 			if (content.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 				content_copy = (String) content.getTransferData(DataFlavor.stringFlavor);
 
-				// åˆ¤æ–­æ–‡æœ¬æ¡†ä¸­æœ‰æ— æ–‡å­—é€‰ä¸­
+				// ÅĞ¶ÏÎÄ±¾¿òÖĞÓĞÎŞÎÄ×ÖÑ¡ÖĞ
 				if (myarea.getSelectedText() != null) {
 					myarea.replaceSelection(content_copy);
 				} else {
@@ -515,11 +521,11 @@ public class Notepad extends JFrame implements ActionListener {
 
 	
 	
-	//åˆ é™¤
+	//É¾³ı
 	private void delete() {
 
 		if (myarea.getSelectedText() == null) {
-			JOptionPane.showMessageDialog(null, "ä½ æ²¡æœ‰é€‰ä¸­ä»»ä½•æ–‡å­—ï¼", "è®°äº‹æœ¬", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "ÄãÃ»ÓĞÑ¡ÖĞÈÎºÎÎÄ×Ö£¡", "¼ÇÊÂ±¾", JOptionPane.WARNING_MESSAGE);
 		}
 		myarea.replaceSelection("");
 	}
